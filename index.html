@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSP Builder + Evaluator</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <header>
+    <h1>CSP Builder + Evaluator</h1>
+    <p class="subtitle">Build and lint Content Security Policies &mdash; entirely client-side.</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="builder">Builder</button>
+    <button class="tab" data-tab="evaluator">Evaluator</button>
+  </nav>
+
+  <main>
+    <!-- Builder Tab -->
+    <section id="builder" class="tab-content active">
+      <div class="section-header">
+        <h2>Build a CSP</h2>
+        <div class="preset-group">
+          <label for="preset-select">Preset:</label>
+          <select id="preset-select">
+            <option value="">— Custom —</option>
+            <option value="strict" selected>Strict (recommended baseline)</option>
+            <option value="spa">SPA + Analytics</option>
+            <option value="reportOnly">Report-Only Starter</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="directive-inputs" class="directive-grid"></div>
+
+      <div class="output-section">
+        <h3>Generated Headers</h3>
+        <div class="output-block">
+          <label>Content-Security-Policy</label>
+          <div class="output-row">
+            <code id="output-enforce"></code>
+            <button class="copy-btn" data-target="output-enforce" title="Copy to clipboard">Copy</button>
+          </div>
+        </div>
+        <div class="output-block">
+          <label>Content-Security-Policy-Report-Only</label>
+          <div class="output-row">
+            <code id="output-report"></code>
+            <button class="copy-btn" data-target="output-report" title="Copy to clipboard">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Evaluator Tab -->
+    <section id="evaluator" class="tab-content">
+      <h2>Evaluate / Lint a CSP</h2>
+      <p>Paste a CSP header or policy string below to check for common issues.</p>
+      <textarea id="eval-input" rows="5" placeholder="e.g. default-src 'self'; script-src 'self' 'unsafe-inline'; img-src *"></textarea>
+      <button id="eval-btn" class="primary-btn">Evaluate</button>
+
+      <div id="eval-results" class="results"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>No data leaves your browser. Safe for GitHub Pages.</p>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
